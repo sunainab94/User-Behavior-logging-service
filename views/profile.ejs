@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border: 3px solid black;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid, black;
+            text-align: left;
+            padding: 8px;
+        }
+        </style>
+  </head>
+  <body>
+       <% include navigate.ejs %>
+    <h2> Welcome to User Profile page <%= locals.user.name %> </h2><br>
+
+    <h3>LOGIN DETAILS</h3>
+    <% var timeLog = locals.user.time.split("$$");
+    for(var temp in timeLog){ %>
+        <label><input type="text" name="timeLog" value="<%= timeLog[temp] %>"></label>
+        <br>
+    <% } %><br>
+    <button onclick="myFunction()">STACK OVERFLOW</button><br>
+<script>
+function myFunction() {
+    window.open("https://stackoverflow.com/questions/tagged/java?sort=frequent&pageSize=15");
+}
+</script>
+    <br><br>
+
+    <table>
+        <tr>
+          <th>User Behaviour</th>
+          <th>Reason for logging behaviour</th>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Ask Question</td>
+          <td>When user asks a question it shows how active she is on the discussion platform. We can also guage the topics of interest by capturing the key words and later recomment similar threads</td>
+        </tr>
+        <tr></tr>
+            <tr>
+                <td>Page Load</td>
+                <td>Used to track the pattern of navigation of pages. This information is useful to do path flow analysis to render better personalization</td>
+              </tr>
+              <tr></tr>
+              <tr>
+            <td>Comment</td>
+            <td>Tracking  the comments of the user can help augment our understanding of the users knowledge and skill. Comments could be to correct, clarify, discuss the posted answers better.</td>
+          </tr>
+          <tr></tr>
+          <tr>
+              <td>Star</td>
+              <td>Star indicates priority. This gives a quick update about the </td>
+            </tr>
+            <tr></tr>
+        <tr>
+          <td>Vote Up</td>
+          <td>An up vote indicates how useful the posted solution was. It also indcates higher success rates which other peers can confidently follow.  </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td>Vote Down</td>
+          <td>A down vote on the answer can indicate incorrect answer or unsatisfactory results.</td>
+        </tr>
+      </table>
+      <br>
+    <% var action = locals.user.actions.split("$$");   
+    for(var temp in action){ %>
+        <label><input type="text" name="elog" size="30" value="<%= action[temp] %>"></label>
+        <br>
+    <% } %><br> 
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

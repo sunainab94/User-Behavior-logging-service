@@ -1,0 +1,40 @@
+<html>
+<head>
+  <title>Login Page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <% include navigate.ejs %>
+
+  <div class="container">
+  <form class="form-signin" role="form" action="/login" method="post">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label class="sr-only" for="inputEmail"></label>
+    <input class="form-control" type="text" name="username" id="inputEmail" placeholder="Username" required="required" autofocus="autofocus"/>
+    <input class="form-control" type="password" name="password" id="inputPassword" placeholder="Password"/>
+    <textarea id="datetime" name="date" style="display:none;"></textarea>
+    <button class="btn btn-lg btn-primary btn-block" id="loginButtonId" type="submit">LOGIN</button>
+  </form>
+ <script>
+            $(document).ready(function () {
+                //alert("Login page");
+                $("#loginButtonId").click(function (event) {
+                    //alert("Button clicked");
+                    var currentdate = new Date();
+                    var datetime = currentdate.getDate() + "/"
+                        + (currentdate.getMonth() + 1) + "/"
+                        + currentdate.getFullYear() + " @ "
+                        + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
+                    //alert(datetime);
+                    $("textarea").val(datetime);
+                });
+            });
+
+</script>
+</div>
+
+</body>
+</html>

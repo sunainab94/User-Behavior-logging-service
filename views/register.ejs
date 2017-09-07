@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Register Page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <% include navigate.ejs %>
+
+  <div class="container">
+  <form class="form-signin" role="form" action="/register" method="post" style="max-width: 300px">
+    <h2 class="form-signin-heading">Sign Up here</h2>
+    <input class="form-control" type="text" name="name" placeholder="Your Name"/>
+    <input class="form-control" type="text" name="username" placeholder="Your Username"/>
+    <input class="form-control" type="password" name="password" placeholder="Your Password"/>
+    <textarea id="datetime" name="date" style="display:none;"></textarea>
+    <button class="btn btn-lg btn-primary btn-block" id="loginButtonId" type="submit">Sign Up</button>
+  </form>
+ <script>
+            $(document).ready(function () {
+                //alert("Login page");
+                $("#loginButtonId").click(function (event) {
+                    //alert("Button clicked");
+                    var currentdate = new Date();
+                    var datetime = currentdate.getDate() + "/"
+                        + (currentdate.getMonth() + 1) + "/"
+                        + currentdate.getFullYear() + " @ "
+                        + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
+                    //alert(datetime);
+                    $("textarea").val(datetime);
+                });
+            });
+
+</script>
+</div>
+
+</body>
+</html>
