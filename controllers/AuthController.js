@@ -64,7 +64,7 @@ userController.doLogin = function(req, res) {
 };
 
 userController.logEvent = function(req, res) {
-
+  //console.log(req);
   if(req.user!=null){
     //console.log(req.body);
     var actionString = req.body.eventType;
