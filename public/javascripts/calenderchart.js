@@ -1,4 +1,4 @@
-window.onload = function () {
+
 
     var width = 960,
 
@@ -113,4 +113,3 @@ window.onload = function () {
     }
 
     d3.select(self.frameElement).style("height", "2910px");
-}

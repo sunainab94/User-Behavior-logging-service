@@ -25,6 +25,9 @@
             <p id="line" style="display:none;">
                 <%= jsonLine %>
             </p>
+            <p id="tagsData" style="display:none;">
+                    <%= jsonDropDowntag %>
+            </p>
 
             <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto">
                 <script type="text/javascript">
@@ -175,7 +178,7 @@
             <button type="button" class="btn btn-primary" onclick="PlotNewGraph();">Plot new Graph</button>
             <div id="container3" style="min-width: 310px; max-width: 700px; height: 400px; margin: 0 auto">
                 <script type="text/javascript">
-                    tagsDict = JSON.parse(document.getElementById('dropdowntag').innerHTML);
+                    tagsDict = JSON.parse(document.getElementById('tagsData').innerHTML);
 
                     function PlotNewGraph() {
                         var e = document.getElementById("dropDown");

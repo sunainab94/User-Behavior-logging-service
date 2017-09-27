@@ -15,6 +15,7 @@ router.get('/', function (req, res, next) {
             try {
                 var Barobj = compareUserBehavior(u);
                 var Lineobj = compareTimeBehavior(u);
+                var Dropdownobj = compareTags(u);
                 var tempTags = "";
                 for(var t in Dropdownobj)
                     tempTags += t + "$";
@@ -109,7 +110,13 @@ function compareTags(allusers) {
         var name = u["username"];
         var allactions = u["actions"];
 
-        dict[name] = questionTags(allactions);
+        var tt = questionTags(allactions);
+        if(Object.keys(tt).length == 0){
+            dict[name] = {};
+        }else{
+            dict[name] = tt;
+        }
+        
 
         var value = dict[name];
 
@@ -148,7 +155,9 @@ return finalDict;
 
 function tagsCountForUser(userDictionary, tag){
     var returnArray = [];
-    for(var eachUser in userDictionary){
+    var users = ["aaa","bbb","ccc"];
+    for(var x in users){
+        var eachUser = users[x];
         var temp = userDictionary[eachUser];
         if(temp[tag])
             returnArray.push(temp[tag]);
@@ -178,24 +187,6 @@ function questionTags(s) {
     }
     return tagDict;
 }
-
-// function tagFunction(dict){
-//     var finalDict = {};
-//     var tempArray = [];
-//     for(var temp in dict){
-//             var value = dict[temp];
-//             var items = Object.keys(value).map(function(key) {
-//                 return [key, value[key]];
-//             });
-//             items.sort(function(first, second) {
-//                 return second[1] - first[1];
-//             });
-//             //console.log(items.slice(0, 3));
-//             tempArray.push(items.slice(0, 3));
-//     }
-//     //console.log(tempArray);
-
-// }
 
 
 module.exports = router;
