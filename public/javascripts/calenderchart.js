@@ -1,7 +1,5 @@
 
-
     var width = 960,
-
         height = 136;
     //var cellSize = 17; // cell size
     var cellSize = Math.floor((width - 50) / 52);
