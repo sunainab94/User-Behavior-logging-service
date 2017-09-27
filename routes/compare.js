@@ -45,7 +45,7 @@ function compareUserBehavior(allusers) {
         var allactions = u["actions"];
         var action = allactions.split("$$");
         //create a dictionary 
-        var tempDict = { 'PageLoaded': 0, 'Star': 0, 'Comment': 0 };
+        var tempDict = { 'PageLoaded': 0, 'Star': 0, 'Comment': 0, 'AskQuestion':0, 'VoteUp': 0};
         for (var temp in action) {
             var x = action[temp].split("#");
             var a = x[0];
@@ -57,6 +57,8 @@ function compareUserBehavior(allusers) {
         temparray[0] = tempDict["PageLoaded"];
         temparray[1] = tempDict["Star"];
         temparray[2] = tempDict["Comment"];
+        temparray[3] = tempDict["AskQuestion"];
+        temparray[4] = tempDict["VoteUp"];
         dict[name] = temparray;
     });
     return dict;
