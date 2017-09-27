@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Compare Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+
+<body>
+    <% var tagsDict = [] %>
+        <% include navigate.ejs %>
+            <br>
+            <br>
+            <p id="data" style="display:none;">
+                <%= jsonData %>
+            </p>
+            <p id="line" style="display:none;">
+                <%= jsonLine %>
+            </p>
+
+            <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto">
+                <script type="text/javascript">
+                    var x = JSON.parse(document.getElementById('data').innerHTML);
+
+                    Highcharts.chart('container', {
+                        chart: {
+                            type: 'bar'
+                        },
+                        title: {
+                            text: 'Compare User activity against peers activities'
+                        },
+                        subtitle: {
+                            text: 'Source: <a href="https://mlab.com/databases/behaviourlogdatabase/collections/users">mLab Database</a>'
+                        },
+                        xAxis: {
+                            categories: ['Page Loads', 'Star', 'Comments'],
+                            title: {
+                                text: null
+                            }
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Frequency of captured events',
+                                align: 'high'
+                            },
+                            labels: {
+                                overflow: 'justify'
+                            }
+                        },
+                        tooltip: {
+                            valueSuffix: ' '
+                        },
+                        plotOptions: {
+                            bar: {
+                                dataLabels: {
+                                    enabled: true
+                                }
+                            }
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'top',
+                            x: -40,
+                            y: 80,
+                            floating: true,
+                            borderWidth: 1,
+                            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                            shadow: true
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: 'aaa',
+                            data: x["aaa"]
+                        }, {
+                            name: 'bbb',
+                            data: x["bbb"]
+                        }, {
+                            name: 'ccc',
+                            data: x["ccc"]
+                        }]
+                    });
+                </script>
+            </div>
+            <br><br>
+            <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto">
+                <script type="text/javascript">
+                    var xline = JSON.parse(document.getElementById("line").innerHTML);
+                    //console.log(xline);
+
+                    Highcharts.chart('container2', {
+                        chart: {
+                            type: 'line',
+                            events: {
+                                click: function (event) {
+                                    var label = this.renderer.label(
+                                        'x: ' + Highcharts.numberFormat(event.xAxis[0].value, 0) + ', y: ' + Highcharts.numberFormat(event.yAxis[0].value, 0),
+                                        event.xAxis[0].axis.toPixels(event.xAxis[0].value),
+                                        event.yAxis[0].axis.toPixels(event.yAxis[0].value)
+                                    )
+                                        .attr({
+                                            fill: Highcharts.getOptions().colors[0],
+                                            padding: 10,
+                                            r: 5,
+                                            zIndex: 8
+                                        })
+                                        .css({
+                                            color: '#FFFFFF'
+                                        })
+                                        .add();
+
+                                    setTimeout(function () {
+                                        label.fadeOut();
+                                    }, 1000);
+                                }
+                            }
+                        },
+                        title: {
+                            text: 'User Logins On A Given Date'
+                        },
+                        subtitle: {
+                            text: 'Source: < a href="https://mlab.com/databases/behaviourlogdatabase/collections/users"> mLab Database</a>'
+                        },
+                        xAxis: {
+                            categories: xline["dates"]
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Frequency of Logins'
+                            }
+                        },
+                        plotOptions: {
+                            series: {
+                                cursor: 'pointer',
+                                point: {
+                                    events: {
+                                        click: function () {
+                                            alert('Date: ' + this.category + ', Number of Logins: ' + this.y);
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'aaa',
+                            data: xline['aaa']
+                        }, {
+                            name: 'bbb',
+                            data: xline['bbb']
+                        }, {
+                            name: 'ccc',
+                            data: xline['ccc']
+                        }]
+                    });
+                </script>
+            </div>
+            <br> <br>
+            <select id="dropDown">
+        <%  var tags = tagsArray.split("$");
+            for(var tag in tags){  %>
+                <option value="<%= tags[tag] %>"><%= tags[tag] %></option>
+        <% } %>
+        </select>
+            <button type="button" class="btn btn-primary" onclick="PlotNewGraph();">Plot new Graph</button>
+            <div id="container3" style="min-width: 310px; max-width: 700px; height: 400px; margin: 0 auto">
+                <script type="text/javascript">
+                    tagsDict = JSON.parse(document.getElementById('dropdowntag').innerHTML);
+
+                    function PlotNewGraph() {
+                        var e = document.getElementById("dropDown");
+                        var tagValue = e.options[e.selectedIndex].value;
+
+                        Highcharts.chart('container3', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Comparing Tags From Different Pages Visited By Different Users'
+                            },
+                            subtitle: {
+                                text: 'Source: WorldClimate.com'
+                            },
+                            xAxis: {
+                                categories: [
+                                    'aaa',
+                                    'bbb',
+                                    'ccc'
+
+                                ],
+                                crosshair: true
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'TagsFrequency'
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+                                footerFormat: '</table>',
+                                shared: true,
+                                useHTML: true
+                            },
+                            plotOptions: {
+                                column: {
+                                    pointPadding: 0.2,
+                                    borderWidth: 0
+                                }
+                            },
+                            series: [{
+                                name: tagValue,
+                                data: tagsDict[tagValue]
+
+                            }]
+                        });
+                    }
+                </script>
+            </div>
+</body>
+
+</html>

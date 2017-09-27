@@ -9,13 +9,17 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://sunu.blg:123@ds129344.mlab.com:29344/behaviourlogdatabase')
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
+// mongoose.connect('mongodb://sunu.blg:123@ds129344.mlab.com:29344/behaviourlogdatabase')
+//   .then(() =>  console.log('connection succesful'))
+//   .catch((err) => console.error(err));
+mongoose.connect('mongodb://localhost/UserDataBase')
+   .then(() =>  console.log('connection succesful'))
+   .catch((err) => console.error(err));
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var profile = require('./routes/profile');
+var userchart = require('./routes/userchart');
+var compare = require('./routes/compare');
 
 var app = express();
 
@@ -40,8 +44,9 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/profile', profile);
+app.use('/userchart', userchart);
+app.use('/compare', compare);
 
 // passport configuration
 var User = require('./models/User');
