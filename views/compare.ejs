@@ -35,7 +35,30 @@
 
                     Highcharts.chart('container', {
                         chart: {
-                            type: 'bar'
+                            type: 'bar',
+                            events: {
+                                click: function (event) {
+                                    var label = this.renderer.label(
+                                        'x: ' + Highcharts.numberFormat(event.xAxis[0].value, 0) + ', y: ' + Highcharts.numberFormat(event.yAxis[0].value, 0),
+                                        event.xAxis[0].axis.toPixels(event.xAxis[0].value),
+                                        event.yAxis[0].axis.toPixels(event.yAxis[0].value)
+                                    )
+                                        .attr({
+                                            fill: Highcharts.getOptions().colors[0],
+                                            padding: 10,
+                                            r: 5,
+                                            zIndex: 8
+                                        })
+                                        .css({
+                                            color: '#FFFFFF'
+                                        })
+                                        .add();
+
+                                    setTimeout(function () {
+                                        label.fadeOut();
+                                    }, 1000);
+                                }
+                            }
                         },
                         title: {
                             text: 'Compare User activity against peers activities'
@@ -96,7 +119,7 @@
                     });
                 </script>
             </div>
-            <br><br>
+            <br><br><br<br><br>
             <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto">
                 <script type="text/javascript">
                     var xline = JSON.parse(document.getElementById("line").innerHTML);
@@ -186,8 +209,31 @@
 
                         Highcharts.chart('container3', {
                             chart: {
-                                type: 'column'
-                            },
+                                type: 'column' ,                       
+                            events: {
+                                click: function (event) {
+                                    var label = this.renderer.label(
+                                        'x: ' + Highcharts.numberFormat(event.xAxis[0].value, 0) + ', y: ' + Highcharts.numberFormat(event.yAxis[0].value, 0),
+                                        event.xAxis[0].axis.toPixels(event.xAxis[0].value),
+                                        event.yAxis[0].axis.toPixels(event.yAxis[0].value)
+                                    )
+                                        .attr({
+                                            fill: Highcharts.getOptions().colors[0],
+                                            padding: 10,
+                                            r: 5,
+                                            zIndex: 8
+                                        })
+                                        .css({
+                                            color: '#FFFFFF'
+                                        })
+                                        .add();
+
+                                    setTimeout(function () {
+                                        label.fadeOut();
+                                    }, 1000);
+                                }
+                            }
+                        },
                             title: {
                                 text: 'Comparing Tags From Different Pages Visited By Different Users'
                             },
