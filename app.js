@@ -9,12 +9,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://sunu.blg:123@ds129344.mlab.com:29344/behaviourlogdatabase')
-//   .then(() =>  console.log('connection succesful'))
-//   .catch((err) => console.error(err));
-mongoose.connect('mongodb://localhost/UserDataBase')
+ mongoose.connect('mongodb://sunu.blg:123@ds129344.mlab.com:29344/behaviourlogdatabase')
    .then(() =>  console.log('connection succesful'))
    .catch((err) => console.error(err));
+// mongoose.connect('mongodb://localhost/UserDataBase')
+//    .then(() =>  console.log('connection succesful'))
+//    .catch((err) => console.error(err));
 
 var index = require('./routes/index');
 var profile = require('./routes/profile');
