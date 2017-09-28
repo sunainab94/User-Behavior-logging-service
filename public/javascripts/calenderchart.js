@@ -1,4 +1,4 @@
-
+function calChart(behaviour){
     var width = 960,
         height = 136;
     //var cellSize = 17; // cell size
@@ -7,7 +7,6 @@
     var legendElementWidth = Math.round(cellSize * 4);
     var legendSvgHeight = 43;
 
-    //var colors =  ['rgb(255,255,217)','rgb(253,224,221)','rgb(252,197,192)','rgb(250,159,181)','rgb(247,104,161)','rgb(221,52,151)','rgb(174,1,126)','rgb(122,1,119)','rgb(73,0,106)'];
     var colors = ["#ffffd9", "#cff9bd", "#a7eec4", "#97d4dd", "#8c96c6", "#4a34c7", "#4b25b9", "#5b056d", "#4d004b"];
 
     var day = d3.time.format("%w"),
@@ -15,13 +14,37 @@
         year = d3.time.format("%Y"),
         valueFormat = d3.format("0.1f"),
         format = d3.time.format("%d/%m/%Y");
-    //format = d3.time.format("%x");
 
-    var theData = JSON.parse(document.getElementById('calenderData').innerHTML);
+    //var theData = JSON.parse(document.getElementById('calenderData').innerHTML);
+    var behaviourCalenderData = JSON.parse(document.getElementById('behaviourData').innerHTML);
+    var theData;
+
+    switch(behaviour) {
+        case "Up vote":
+            theData = behaviourCalenderData["VoteUp"];
+            break;
+        case "Comment":
+            theData = behaviourCalenderData["Comment"];
+            break;
+        case "Star":
+            theData = behaviourCalenderData["Star"];
+            break;
+        case "Ask Question":
+            theData = behaviourCalenderData["AskQuestion"];
+            break;
+        case "Page Load":
+            theData = behaviourCalenderData["PageLoaded"];
+            break;
+        default:
+        console.log("Default case, plotting for number of logins")
+            theData = JSON.parse(document.getElementById('calenderData').innerHTML);
+            break;
+    }
+    document.getElementById('heatMapHeading').innerHTML = "Behaviour : " + behaviour + " (of current user), using Calender Chart";
+    //var theData = behaviourCalenderData[behaviour];
+    
     console.log(theData);
 
-    // interestingly, the only place theData is used is 
-    // to create the scale
     console.log("min=", d3.min(d3.values(theData)));
     var colorScale = d3.scale.quantize()
         //.domain([-.05, .05])
@@ -29,14 +52,11 @@
         //.range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
         .range(colors);
 
-    // a *separate* svg for each year.
-    // note: data is simply an array of years, going 1 past the max desired year
     var svg = d3.select("#heatMap").selectAll("svg")
         .data(d3.range(2017, 2018))
         .enter().append("svg")
         .attr("width", width)
         .attr("height", height)
-        //.attr("class", "RdYlGn")
         .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
@@ -71,9 +91,10 @@
         .text(function (d) { return d + " : " + valueFormat(theData[d]); });
     //});
 
-    var legendSvg = d3.select("body").append("svg")
+    var legendSvg = d3.select("#heatMap").append("svg")
         .attr("width", width)
         .attr("height", legendSvgHeight)
+        .attr("id", "scale")
         .append("g")
         .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
@@ -111,3 +132,9 @@
     }
 
     d3.select(self.frameElement).style("height", "2910px");
+    return document.getElementById("scale");
+}
+
+function clearCalender(){
+    d3.selectAll("svg").remove();
+}

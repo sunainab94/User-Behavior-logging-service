@@ -12,9 +12,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+    <script type="text/javascript" src="/javascripts/calenderchart.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-
+    <style>
+        p.double {
+            border-style: double;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,6 +32,10 @@
         <p id="calenderData" style="display:none;">
             <%= jsonCalenderData %>
         </p>
+        <p id="behaviourData" style="display:none;">
+            <%= jsonBehaviourDate %>
+        </p>
+
 
 
         <a class="btn btn-large btn-info" href="/compare">VISUALIZE ALL USERS</a>
@@ -36,7 +44,7 @@
 
             <script type="text/javascript">
                 var x = JSON.parse(document.getElementById('data').innerHTML);
-
+                var el = null;
                 Highcharts.chart('highChart', {
                     chart: {
                         plotBackgroundColor: null,
@@ -45,7 +53,7 @@
                         type: 'pie'
                     },
                     title: {
-                        text: 'User Behaviour with Stack over flow'
+                        text: 'User Behaviour V/S Frequency'
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -66,18 +74,37 @@
                     series: [{
                         name: 'Frequency',
                         colorByPoint: true,
-                        data: x
+                        data: x,
+                        point: {
+                            events: {
+                                click: function (event) {
+                                    console.log(this.name);
+                                    document.getElementById('heatMap').innerHTML = "";
+                                    if (el != null) { el.innerHTML = ""; }
+                                    el = calChart(this.name);
+                                    //console.log(el);
+
+                                }
+                            }
+                        }
                     }]
                 });
             </script>
         </div>
+        <p class="double"><b>Analysis:</b><br>The Pie chart depicts the different behavior logs versus frequency for the logged user. The pattern
+            observed here is that page loads had maximum count relative to other behaviours. From this it can be inferred
+            that most people viewed the page for answers only. Also, the user bookmarked the question if it was useful to
+            him. From the Calendar heatmap we can find users activity for different dates with higher frequencies in darker
+            shades. Then the user bookmarked the question if he found information useful.
+            <br> <b>Interactivity:</b><br> Hover: Gives the number of times the behaviour was performed by user.<br>Click:
+            On clicking a behaviour a CalendarMap is displayed giving the dates the behaviour was performed
+        </p>
         <br><br>
-        <div id="heatMap">
-            <h4 align="center">Current User Login using Calender Chart</h4>
-            <script type="text/javascript" src="/javascripts/calenderchart.js"></script>
-        </div>
+        <h4 align="center" id="heatMapHeading">Select a portion of Pie chart first</h4>
+        <div id="heatMap"></div>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 </body>
+
 </html>
