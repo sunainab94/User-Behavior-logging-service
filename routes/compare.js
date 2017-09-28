@@ -132,7 +132,7 @@ function compareTags(allusers) {
 
     });
     var tagsSorted = Object.keys(tagsCount).sort(function(a,b){return tagsCount[b]-tagsCount[a]})
-    if(tagsSorted.length < 6){
+    if(tagsSorted.length < 8){
 
         for(var x in tagsSorted){
             var eachTag = tagsSorted[x];
@@ -145,7 +145,7 @@ function compareTags(allusers) {
             var eachTag = tagsSorted[x];
             finalDict[eachTag] = tagsCountForUser(dict, eachTag);
             count++;
-            if(count > 6)
+            if(count > 8)
                 break;
         }
 

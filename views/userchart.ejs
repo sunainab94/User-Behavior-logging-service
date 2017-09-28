@@ -91,20 +91,30 @@
                 });
             </script>
         </div>
-        <p class="double"><b>Analysis:</b><br>The Pie chart depicts the different behavior logs versus frequency for the logged user. The pattern
-            observed here is that page loads had maximum count relative to other behaviours. From this it can be inferred
-            that most people viewed the page for answers only. Also, the user bookmarked the question if it was useful to
-            him. From the Calendar heatmap we can find users activity for different dates with higher frequencies in darker
-            shades. Then the user bookmarked the question if he found information useful.
-            <br> <b>Interactivity:</b><br> Hover: Gives the number of times the behaviour was performed by user.<br>Click:
-            On clicking a behaviour a CalendarMap is displayed giving the dates the behaviour was performed
+        <p class="double"><b>Analysis:</b><br>
+            <ol>
+                <li>The Pie chart depicts the different behavior logs versus frequency for the logged user.</li>
+                <li>The pattern observed here is that page loads had maximum count relative to other behaviours.</li>
+                <li> From this it can be inferred that most people viewed the page to refer to answers only.</li>
+                <li>Also, the user bookmarked the question if it was useful to them. </li>
+                <li>On clicking a sector of the Pie chart for a particular behaviour, a Calendar Heatmap is rendered for the
+                    same behaviour that is clicked. </li>
+                <li>Here a time frequency analysis is done on the selected behaviour. </li>
+                <li>The findings from hovering over the Heatmap was: The behaviours were mostly recorded on busy days of the
+                    week in the morning or night.</li>
+                <li>This analysis could help the users better organize their study patterns. </li>
+            </ol>
         </p>
-        <br><br>
-        <h4 align="center" id="heatMapHeading">Select a portion of Pie chart first</h4>
-        <div id="heatMap"></div>
+            <p class="double"> <b>Interactivity:</b><br>Click:On clicking a behaviour in the Pie chart a Calendar Heatmap is displayed giving
+                dates when the behaviour was performed<br> Hover: Gives the number of times the behaviour was performed by
+                user.
+            </p>
+            <br><br>
+            <h4 align="center" id="heatMapHeading">Click a behaviour on the Pie chart</h4>
+            <div id="heatMap"></div>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
 </body>
 
 </html>

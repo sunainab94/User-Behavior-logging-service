@@ -11,7 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <style> p.double {border-style: double;}</style>
+    <style>
+        p.double {
+            border-style: double;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,7 +33,7 @@
                 <%= jsonDropDowntag %>
             </p>
 
-            <a class="btn btn-large btn-info" href="/userchart">VISUALIZE LOGGEDIN USERS</a>
+            <a class="btn btn-large btn-info" href="/userchart">VISUALIZE LOGGED IN USERS</a>
             <br>
             <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto">
                 <script type="text/javascript">
@@ -121,8 +125,20 @@
                     });
                 </script>
             </div>
-            <p class="double"><b>Analysis:</b><br> Here we find that though the user "aaa" had maximum page views while the other behaviours recorded were less on an average. Also, though user "ccc" had lesser page loads she had higher activity records like bookmarking or commenting questions encouraging other users to be more active. User "bbb" was more keen on posting questions to clarify doubts on viewing a page. It was observed that most of the behaviours were performed during the day or night.
-                <br> <b>Interactivity:</b><br> Hover: It gives the frequency of behaviours of all users for easy comparison.<br>Click: Clicking the user names can hide the respective user graph to better analyze other users or for individual user analysis.
+            <p class="double"><b>Analysis:</b><br> Here we make a comparison on the behaviour logs for all users. This study can be used to
+                verify if the user having a higher login rate is equally active on the site.
+                <ol>
+                    <li>Example: We observe that user "aaa" had maximum page views and fairly higher rates of other behaviours
+                        recordings too.</li>
+                    <li>While user "ccc" had lesser page loads she was more active as her records show higher count of behaviours
+                        logged like bookmarking or commenting questions. </li>
+                    <li>User "bbb" was more keen on posting questions to clarify doubts on viewing a page. </li>
+                    <li>It was observed that most of the behaviours were performed during the day or night.</li>
+                </ol>
+            </p>
+                <p class="double"><br> <b>Interactivity:</b><br> Hover: It gives the frequency of behaviours of all users for easy comparison.<br>Click:
+                Clicking the user names can hide the respective user graph to better analyze other users or for individual
+                user analysis.
             </p>
             <br><br>
             <br<br><br><br>
@@ -158,7 +174,7 @@
                                 }
                             },
                             title: {
-                                text: 'User Logins On A Given Date'
+                                text: 'Compare User Logins On A Given Date'
                             },
                             subtitle: {
                                 text: 'Source: < a href="https://mlab.com/databases/behaviourlogdatabase/collections/users"> mLab Database</a>'
@@ -168,7 +184,7 @@
                             },
                             yAxis: {
                                 title: {
-                                    text: 'Frequency of Logins'
+                                    text: 'Number of Logins'
                                 }
                             },
                             plotOptions: {
@@ -197,11 +213,18 @@
                     </script>
                 </div>
                 <br>
-                <p class="double"><b>Analysis:</b><br>This graph compares the login activities of users. Higher the number of logins we deduce that the user is more active. User "aaa" has a higher login rate consistently when compared to others indicating he spends more time on the site. 
-                    <br> <b>Interactivity:</b><br>Click: Click the nodes to get details for the graph in alert message<br> Hover: Gives the details of frequency of logins for all users.
+                <p class="double"><b>Analysis:</b><br>
+                    <ol>
+                        <li>This graph compares the login activities of users.</li>
+                        <li>Higher the number of logins we deduce that the user is more active. </li>
+                        <li>User "aaa" has a higher login rate consistently when compared to others, indicating that he spends
+                            more time on the site. This stats could encourage his peers to be more active on the site. </li>
+                    </ol>
+                </p>
+                <p class="double"><b>Interactivity:</b><br>Click: Click the nodes to get details for the graph as an alert message<br>                    Hover: Gives the details of frequency of logins for all users.
                 </p>
                 <br><br>
-                <h4><span class="label label-warning">Please Select A Tag Filter To View Graph</span></h4> 
+                <h4><span class="label label-warning">Please Select A Tag Filter To View Graph</span></h4>
                 <select id="dropDown">
         <%  var tags = tagsArray.split("$");
             for(var tag in tags){  %>
@@ -244,7 +267,7 @@
                                         }
                                     },
                                     title: {
-                                        text: 'Comparing Tags From Different Pages Visited By Different Users'
+                                        text: 'Compare Tags From Different Pages Visited By Different Users'
                                     },
                                     subtitle: {
                                         text: 'Source: < a href="https://mlab.com/databases/behaviourlogdatabase/collections/users"> mLab Database</a>'
@@ -288,8 +311,18 @@
                         });
                     </script>
                 </div>
-                <p class="double"><b>Analysis:</b><br>The analysis on tags gives the topics of interest for the user. The pattern found here was that people with similar interests recorded higher frequencies for similar tags. The tags from different questions is collected and only the top 6 tags are analyzed. To illustrate the findings: Java tag was common amongst all the users. 
-                    <br> <b>Interactivity:</b><br>Filter: Filter based on tags. Select a tag from the dropdownlist to view graph for the selected tag<br> Hover: Gives the details of frequency of the tag.<br>Click: Click anywhere on the graph it gives the coordinates at that point.
+                <p class="double"><b>Analysis:</b>
+                    <ol>
+                        <li>From the analysis on tags visited by the user, we can obtain the topics of interest to the user.</li>
+                        <li>The pattern observed here was that we could group people with similar interests from the higher frequencies
+                            recorded for similar tags. </li>
+                        <li>The tags for different questions are collected and only the top 8 tags are analyzed every time. To
+                            illustrate the findings: Java tag was common amongst all the users. </li>
+                    </ol>
+                </p>
+                <p class="double"><br> <b>Interactivity:</b><br>Filter: Filter based on tags. Select a tag from the dropdownlist to view graph
+                    for the selected tag<br> Hover: Gives the details of frequency of the tag.<br>Click: Click anywhere on
+                    the graph it gives the coordinates at that point.
                 </p>
 </body>
 

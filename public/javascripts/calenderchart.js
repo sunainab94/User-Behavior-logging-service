@@ -40,7 +40,7 @@ function calChart(behaviour){
             theData = JSON.parse(document.getElementById('calenderData').innerHTML);
             break;
     }
-    document.getElementById('heatMapHeading').innerHTML = "Behaviour : " + behaviour + " (of current user), using Calender Chart";
+    document.getElementById('heatMapHeading').innerHTML = "Time Analysis of User Behaviour : " + behaviour + " using Calendar Heatmap";
     //var theData = behaviourCalenderData[behaviour];
     
     console.log(theData);
